@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
 class AddressBookAPI:
     def __init__(self):
@@ -32,16 +34,18 @@ class AddressBookAPI:
         wd = self.wd
         # Init Group form
         wd.find_element_by_name("new").click()
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group.name_group)
-
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group.header_group)
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group.footer_group)
+        if group.name_group is not None:
+            wd.find_element_by_name("group_name").click()
+            wd.find_element_by_name("group_name").clear()
+            wd.find_element_by_name("group_name").send_keys(group.name_group)
+        if group.header_group is not None:
+            wd.find_element_by_name("group_header").click()
+            wd.find_element_by_name("group_header").clear()
+            wd.find_element_by_name("group_header").send_keys(group.header_group)
+        if group.footer_group is not None:
+            wd.find_element_by_name("group_footer").click()
+            wd.find_element_by_name("group_footer").clear()
+            wd.find_element_by_name("group_footer").send_keys(group.footer_group)
 
         # Submit groupForm
         wd.find_element_by_name("submit").click()
@@ -71,3 +75,14 @@ class AddressBookAPI:
         wd = self.wd
         return wd.find_element_by_css_selector("div.msgbox").text
 
+    def is_element_present(self, by, locator):
+        wd = self.wd
+        try:
+            wd.find_element(by, locator)
+            return True
+        except NoSuchElementException:
+            return False
+
+    def is_groups_present(self):
+        self.open_page()
+        self.is_element_present(By.NAME, 'selected[]')
