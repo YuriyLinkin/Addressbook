@@ -4,7 +4,11 @@ import pytest
 @pytest.fixture(scope="session")
 def app():
     app = AddressBookAPI()
-    app.login(password="secret", login="admin")
     yield app
-    app.logout()
     app.destroy()
+
+@pytest.fixture(scope="session")
+def init_login(app):
+    app.login(password="secret", login="admin")
+    yield
+    app.logout()
