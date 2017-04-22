@@ -3,7 +3,7 @@ from selenium import webdriver
 class AddressBookAPI:
     def __init__(self):
         self.wd = webdriver.Chrome()
-        self.wd.implicitly_wait(60)
+        self.wd.implicitly_wait(5)
 
     def open_homepage(self):
         wd = self.wd
@@ -12,6 +12,7 @@ class AddressBookAPI:
 
     def login(self, password="secret", login="admin"):
         wd = self.wd
+        self.open_homepage()
         # Login
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
@@ -57,3 +58,11 @@ class AddressBookAPI:
 
     def destroy(self):
         self.wd.quit()
+
+    def delete_group_by_number(self, number):
+
+        wd = self.wd
+        # open_page()
+        checkboxes = wd.find_elements_by_name("selected[]")
+        checkboxes[number].click()
+        wd.find_element_by_name("delete").click()
