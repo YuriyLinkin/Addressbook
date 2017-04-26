@@ -8,53 +8,64 @@ class updated_AB_api(unittest.TestCase):
     
     def test_updated_AB_api(self):
         wd = self.wd
-        #open_site
-        wd.get("http://localhost:8888/addressbook/")
-        #login
+        self.open_site(wd)
+        self.login(wd)
+        self.open_groups(wd)
+        self.choose_changing_group(wd)
+        self.modify_group(wd)
+        self.updated_group(wd)
+        self.return_group_page(wd)
+        self.logout(wd)
+
+    def logout(self, wd):
+        # logout
+        wd.find_element_by_link_text("form[name='logout'] > a").click()
+
+    def return_group_page(self, wd):
+        # return_group _page
+        wd.find_element_by_link_text("group page").click()
+
+    def updated_group(self, wd):
+        # updated_group
+        wd.find_element_by_name("update").click()
+
+    def modify_group(self, wd):
+        # modify_group
+        wd.find_element_by_name("group_name").click()
+        wd.find_element_by_name("group_name").clear()
+        wd.find_element_by_name("group_name").send_keys("Yuriy_group")
+        wd.find_element_by_name("group_header").click()
+        wd.find_element_by_name("group_header").clear()
+        wd.find_element_by_name("group_header").send_keys("header_y_group")
+        wd.find_element_by_name("group_footer").click()
+        wd.find_element_by_name("group_footer").clear()
+        wd.find_element_by_name("group_footer").send_keys("footer_y_group")
+
+    def choose_changing_group(self, wd):
+        # choose_changing_group
+        wd.find_element_by_xpath("//div[@id='content']/form").click()
+        if not wd.find_element_by_xpath("//div[@id='content']/form/input[6]").is_selected():
+            wd.find_element_by_xpath("//div[@id='content']/form/input[6]").click()
+        wd.find_element_by_xpath("//div[@id='content']/form/input[10]").click()
+
+    def open_groups(self, wd):
+        # open_groups
+        wd.find_element_by_xpath("//*[@id='nav']/ul/li[3]/a").click()
+
+    def login(self, wd):
+        # login
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys("admin")
-        wd.find_element_by_id("LoginForm").click()
         wd.find_element_by_name("pass").click()
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
-        #open_groups
-        wd.find_element_by_link_text("//*[@id='nav']/ul/li[3]/a").click()
-        #choose_changing_group
-        wd.find_element_by_xpath("//div[@id='content']/form").click()
-        if not wd.find_element_by_name("selected[]").is_selected():
-            wd.find_element_by_name("selected[]").click()
-        wd.find_element_by_xpath("//div[@id='content']/form/input[9]").click()
-        #modify_group
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys("group_byYuriy")
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys("group_byYuriy")
 
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys("header")
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys("header_byYuriy")
+    def open_site(self, wd):
+        # open_site
+        wd.get("http://localhost:8888/addressbook/")
 
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys("footer")
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys("footer_byYuriy")
-        #updated_group
-        wd.find_element_by_name("update").click()
-        #return_group _page
-        wd.find_element_by_link_text("group page").click()
-        #logout
-        wd.find_element_by_link_text("form[name='logout'] > a").click()
-
-    
     def tearDown(self):
         self.wd.quit()
 
