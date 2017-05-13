@@ -1,14 +1,28 @@
 from web_api.addressbook_api import AddressBookAPI
 from web_api.updated_AB_api import AddressBookAPI_2
 import pytest
+import json
 import random
+import os.path
 from data.test_groups import test_groups
 from models.group import Group
 
+def pytest_addoption(parser):
+    parser.addoption("--browser", action="store", default="firefox")
+    parser.addoption("--config", action="store", default="config.json")
+
 
 @pytest.fixture(scope="session")
-def app():
-    app = AddressBookAPI()
+def config(request):
+    file_name = request.config.getoption("--config")
+    file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name )
+    with open (file_name) as f:
+        return json.load(f)
+
+@pytest.fixture(scope="session")
+def app(request, config):
+    browser = request.config.getoption("--browser")
+    app = AddressBookAPI(browser=browser, base_url=config['base_url'])
     yield app
     app.destroy()
 

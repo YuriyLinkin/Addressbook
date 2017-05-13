@@ -1,13 +1,13 @@
 [
-{ "name": "pok",
-  "header": "h_pok",
-  "footer": "f_pok" },
+{ "name_group": "pok",
+  "header_group": "h_pok",
+  "footer_group": "f_pok" },
 
-  { "name": "sok",
-    "header": "h_sok",
-    "footer": "f_sok"},
+  { "name_group": "sok",
+    "header_group": "h_sok",
+    "footer_group": "f_sok"},
 
-  { "name": "rok",
-    "header": "h_rok",
-    "footer": "f_rok"}
+  { "name_group": "rok",
+    "header_group": "h_rok",
+    "footer_group": "f_rok"}
 ]
