@@ -1,0 +1,13 @@
+[
+{ "name": "pok",
+  "header": "h_pok",
+  "footer": "f_pok" },
+
+  { "name": "sok",
+    "header": "h_sok",
+    "footer": "f_sok"},
+
+  { "name": "rok",
+    "header": "h_rok",
+    "footer": "f_rok"}
+]

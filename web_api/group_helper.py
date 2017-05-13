@@ -63,7 +63,7 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
     """
 
-    def is_group_present(self):
+    def is_groups_present(self):
         self.open_page()
         return self.app.is_element_present(By.NAME, 'selected[]')
 
@@ -82,7 +82,7 @@ class GroupHelper:
     def count(self):
         wd = self.app.wd
         self.open_page()
-        checkboxes = wd.find_element_by_name('selected[]')
+        checkboxes = wd.find_elements_by_name('selected[]')
         return len(checkboxes)
 
     def modification_by_number(self, number, data_to_modification ):

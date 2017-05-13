@@ -1,21 +1,12 @@
 from selenium import webdriver
-import unittest
 
-class updated_AB_api(unittest.TestCase):
-    def setUp(self):
+
+class AddressBookAPI_2:
+    def __init__(self):
         self.wd = webdriver.Chrome()
         self.wd.implicitly_wait(60)
     
-    def test_updated_AB_api(self):
 
-        self.open_site()
-        self.login(password="secret", login="admin")
-        self.open_groups()
-        self.choose_changing_group()
-        self.modify_group(name="Yuriy_group", header="header_y_group", footer="footer_y_group")
-        self.updated_group()
-        self.return_group_page()
-        self.logout()
 
     def logout(self):
         # logout
@@ -60,7 +51,9 @@ class updated_AB_api(unittest.TestCase):
 
     def login(self, login, password):
         # login
+        self.open_site()
         wd = self.wd
+
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(login)
@@ -74,8 +67,11 @@ class updated_AB_api(unittest.TestCase):
         wd = self.wd
         wd.get("http://localhost:8888/addressbook/")
 
-    def tearDown(self):
+    def exit(self):
         self.wd.quit()
 
-if __name__ == '__main__':
-    unittest.main()
+    def message(self):
+        wd = self.wd
+        return wd.find_element_by_css_selector("div.msgbox").text
+
+
