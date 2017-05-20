@@ -3,8 +3,10 @@ import pymysql
 config = {
     "host": "localhost",
     "port": 8889,
-    "passwoed": "root",
-    "db": "test"
+    "user": "root"
+    "password": "root",
+    "db": "test",
+    "charset": "utf8"
 }
 
 connection = pymysql.connect(**config)

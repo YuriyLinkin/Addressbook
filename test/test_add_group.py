@@ -1,5 +1,5 @@
 
-def test_add_group(app, init_login, test_group):
+def test_add_group(app, init_login, test_group, db):
     app.group.open_page()
     old_groups_list = db.get_group_list()
     app.group.create_group(test_group)

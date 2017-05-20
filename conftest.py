@@ -23,7 +23,7 @@ def config(request):
 @pytest.fixture(scope="session")
 def app(request, config):
     browser = request.config.getoption("--browser")
-    app = AddressBookAPI(browser=browser, base_url=config[["web"]'base_url'])
+    app = AddressBookAPI(browser=browser, base_url=config["web"]['base_url'])
     yield app
     app.destroy()
 
@@ -35,7 +35,7 @@ def db (config):
 
 @pytest.fixture(scope="session")
 def init_login(app, config):
-    app.session.login(username=config["web"]["username"], password=config ["web"]["password"])
+    app.session.login(login=config["web"]["login"], password=config["web"]["password"])
     yield
     app.session.logout()
 
