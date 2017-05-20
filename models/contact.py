@@ -1,5 +1,9 @@
 class Contact:
-    def __init__(self, name_group=None, header_group=None, footer_group=None):
-        self.name_group = name_group
-        self.header_group = header_group
-        self.footer_group = footer_group
+    def __init__(self, firstname=None, middlename=None, lastname=None, id=None):
+        self.firstname = firstname
+        self.middlename = middlename
+        self.lastname = lastname
+        self.id = id
+
+    def __repr__(self):
+        return "id: {}, {}, {}, {}".format(self.id, self.firstname, self.middlename, self.lastname)

@@ -1,5 +1,6 @@
 import pymysql
 from models.group import Group
+from models.contact import Contact
 
 class AddressbookDB:
     def __init__(self, host, port, user, password, db):
@@ -14,6 +15,16 @@ class AddressbookDB:
                group_list.append(Group(id=row[0], name_group=row[1], header_group=row[2], footer_group=row[3]))
         self.connection.commit()
         return group_list
+
+    def get_contact_list(self):
+        with self.connection.cursor() as cursor:
+            sql = """SELECT id, firstname, middlename, lastname FROM addressbook WHERE deprecated='0000-00-00 00:00:00';"""
+            cursor.execute(sql)
+            contact_list = []
+        for row in cursor:
+            contact_list.append(Contact(id=row[0], firstname=row[1], middlename=row[2], lastname=row[3]))
+        self.connection.commit()
+        return contact_list
 
     def destroy(self):
         self.connection.close()
