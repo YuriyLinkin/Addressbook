@@ -16,7 +16,7 @@ class AddressBookAPI:
         else:
             raise ValueError("Unrecognized browser {}".format(browser))
 
-        self.wd = webdriver.Chrome()
+
         self.wd.implicitly_wait(5)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
