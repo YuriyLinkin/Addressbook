@@ -1,19 +1,22 @@
-from db_api.addressbook_db import AddressbookDB
+from db_api.addressbook_orm import AddressbookORM
+from models.group import Group
 
 config = {
     "host": "localhost",
     "port": 8889,
-    "user": "root"
+    "user": "root",
     "password": "root",
     "db": "test"
 }
 
-db = AddressbookDB(**config)
+db = AddressbookORM(**config)
 
 
 try:
-    for c in db.get_contact_list():
-            print(c)
+    l = db.get_contacts_in_group(Group(id='7'))
+    for c in l:
+        print(c)
+    print(len(l))
 
 finally:
-    db.destroy()
+    pass

@@ -4,7 +4,7 @@ import pytest
 import json
 import random
 import os.path
-from db_api.addressbook_db import AddressbookDB
+from db_api.addressbook_orm import AddressbookORM
 from data.test_groups import test_groups
 from models.group import Group
 
@@ -29,9 +29,9 @@ def app(request, config):
 
 @pytest.fixture(scope="session")
 def db (config):
-    dbfixture = AddressbookDB (**config['db'])
+    dbfixture = AddressbookORM(**config['db'])
     yield dbfixture
-    dbfixture.destroy()
+    #dbfixture.destroy()
 
 @pytest.fixture(scope="session")
 def init_login(app, config):
